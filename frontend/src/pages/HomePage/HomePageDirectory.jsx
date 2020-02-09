@@ -42,9 +42,14 @@ const HomePageDirectory = () => {
 
   return (
     <DirectoryMenu>
-      {menuItems.map(({ title, imageUrl }, id) => {
+      {menuItems.map(({ title, imageUrl, size }, id) => {
         return (
-          <HomePageDirectoryItem key={id} title={title} imageUrl={imageUrl} />
+          <HomePageDirectoryItem
+            key={id}
+            title={title}
+            size={size}
+            imageUrl={imageUrl}
+          />
         );
       })}
     </DirectoryMenu>
