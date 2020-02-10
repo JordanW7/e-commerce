@@ -45,7 +45,6 @@ const MenuItem = styled(Link)`
   border: 1px solid black;
   margin: 0 7.5px 15px;
   overflow: hidden;
-  color: #333333;
 
   @media screen and (max-width: 690px) {
     height: 240px;
