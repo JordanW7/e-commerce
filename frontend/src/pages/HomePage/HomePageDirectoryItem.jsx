@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const MenuItemContent = styled.div`
   height: 90px;
@@ -34,7 +35,7 @@ const MenuItemBackground = styled.div`
   background-size: cover;
 `;
 
-const MenuItem = styled.div`
+const MenuItem = styled(Link)`
   min-width: 30%;
   height: ${props => (props.size === "large" ? "380px" : "240px")};
   flex: 1 1 auto;
@@ -44,6 +45,7 @@ const MenuItem = styled.div`
   border: 1px solid black;
   margin: 0 7.5px 15px;
   overflow: hidden;
+  color: #333333;
 
   @media screen and (max-width: 690px) {
     height: 240px;
@@ -69,9 +71,9 @@ const MenuItem = styled.div`
   }
 `;
 
-const HomePageDirectoryItem = ({ title, imageUrl, size }) => {
+const HomePageDirectoryItem = ({ title, imageUrl, size, linkUrl }) => {
   return (
-    <MenuItem size={size}>
+    <MenuItem size={size} to={linkUrl}>
       <MenuItemBackground imageUrl={imageUrl} />
       <MenuItemContent>
         <MenuItemContentTitle>{title.toUpperCase()}</MenuItemContentTitle>

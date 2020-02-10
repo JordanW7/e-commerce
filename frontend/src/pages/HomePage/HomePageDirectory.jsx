@@ -14,43 +14,36 @@ const HomePageDirectory = () => {
     {
       title: "hats",
       imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-      linkUrl: "shop/hats"
+      linkUrl: "/shop/hats"
     },
     {
       title: "jackets",
       imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-      linkUrl: "shop/jackets"
+      linkUrl: "/shop/jackets"
     },
     {
       title: "sneakers",
       imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-      linkUrl: "shop/sneakers"
+      linkUrl: "/shop/sneakers"
     },
     {
       title: "womens",
       imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
       size: "large",
-      linkUrl: "shop/womens"
+      linkUrl: "/shop/womens"
     },
     {
       title: "mens",
       imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
       size: "large",
-      linkUrl: "shop/mens"
+      linkUrl: "/shop/mens"
     }
   ];
 
   return (
     <DirectoryMenu>
-      {menuItems.map(({ title, imageUrl, size }, id) => {
-        return (
-          <HomePageDirectoryItem
-            key={id}
-            title={title}
-            size={size}
-            imageUrl={imageUrl}
-          />
-        );
+      {menuItems.map((props, id) => {
+        return <HomePageDirectoryItem key={id} {...props} />;
       })}
     </DirectoryMenu>
   );
