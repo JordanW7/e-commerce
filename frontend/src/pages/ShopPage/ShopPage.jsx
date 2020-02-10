@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import SHOP_DATA from "./shopData";
-import CollectionPreview from "../../components/CollectionPreview/CollectionPreview";
+import CollectionPreview from "../../components/CollectionPreview";
 
 const Page = styled.main``;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import CollectionItem from "../CollectionItem/CollectionItem";
+import CollectionItem from "./CollectionItem";
 
 const Container = styled.div`
   display: flex;

@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { auth } from "../firebase/firebase";
 
-import { ReactComponent as Logo } from "../../assets/crown.svg";
+import { ReactComponent as Logo } from "../assets/crown.svg";
 
 const Container = styled.header`
   height: 70px;
@@ -30,7 +31,16 @@ const NavLink = styled(Link)`
   padding: 10px 15px;
 `;
 
-const Header = () => {
+const SignoutButton = styled.button`
+  padding: 10px 15px;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  cursor: pointer;
+`;
+
+const Header = ({ currentUser }) => {
   return (
     <Container>
       <LogoLink to="/">
@@ -38,7 +48,14 @@ const Header = () => {
       </LogoLink>
       <NavigationOptions>
         <NavLink to="/shop">SHOP</NavLink>
-        <NavLink to="/shop">SHOP</NavLink>
+        <NavLink to="/shop">CONTACT</NavLink>
+        {currentUser ? (
+          <SignoutButton type="button" onClick={auth.signOut}>
+            SIGN OUT
+          </SignoutButton>
+        ) : (
+          <NavLink to="/signin">SIGN IN</NavLink>
+        )}
       </NavigationOptions>
     </Container>
   );
