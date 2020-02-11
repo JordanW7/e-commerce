@@ -1,6 +1,6 @@
 import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { auth } from "./firebase/firebase";
+import { auth, createUserProfileDocument } from "./firebase/firebase";
 import Header from "./components/Header";
 
 const HomePage = lazy(() =>
@@ -19,8 +19,17 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (!userAuth) {
+        setCurrentUser(null);
+      }
+      const userRef = await createUserProfileDocument(userAuth);
+      userRef.onSnapshot(snapshot => {
+        setCurrentUser({
+          id: snapshot.id,
+          ...snapshot.data()
+        });
+      });
     });
     return () => unsubscribeFromAuth();
   }, []);
