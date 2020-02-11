@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
-import { signInWithGoogle } from "../../firebase/firebase";
+import { auth, signInWithGoogle } from "../../firebase/firebase";
 
 const Container = styled.div`
   width: 425px;
@@ -32,14 +32,31 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
+const ErrorText = styled.span`
+  display: block;
+  color: red;
+  margin: 20px 0px;
+`;
+
 const SignInForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    setEmail("");
-    setPassword("");
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setEmail("");
+      setPassword("");
+      setError("");
+    } catch (error) {
+      if (error.message) {
+        setError(error.message);
+        return;
+      }
+      console.error(error);
+    }
   };
 
   const handleChange = ({ target: { value, name } }) => {
@@ -78,6 +95,7 @@ const SignInForm = () => {
             Sign in with Google
           </GoogleButton>
         </ButtonContainer>
+        {error && <ErrorText>{error}</ErrorText>}
       </form>
     </Container>
   );

@@ -47,6 +47,7 @@ const SignUpForm = () => {
       setEmail("");
       setPassword("");
       setConfirmPassword("");
+      setError("");
     } catch (error) {
       if (error.message) {
         return setError(error.message);
