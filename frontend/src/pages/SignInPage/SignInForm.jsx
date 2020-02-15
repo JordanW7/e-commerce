@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
-import { auth, signInWithGoogle } from "../../firebase/firebase";
+import { auth, signInWithGoogle } from "../../libs/firebase";
 
 const Container = styled.div`
   width: 425px;

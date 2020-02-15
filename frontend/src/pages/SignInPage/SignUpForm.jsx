@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { auth, createUserProfileDocument } from "../../firebase/firebase";
+import { auth, createUserProfileDocument } from "../../libs/firebase";
 
 const Container = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { auth } from "../firebase/firebase";
+import { auth } from "../libs/firebase";
 import { useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../assets/crown.svg";
 
