@@ -1,6 +1,8 @@
-import React, { Fragment, lazy, Suspense, useEffect, useState } from "react";
+import React, { Fragment, lazy, Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase";
+import { setCurrentUser } from "./redux/user.actions";
 import Header from "./components/Header";
 
 const HomePage = lazy(() =>
@@ -16,27 +18,30 @@ const SignInPage = lazy(() =>
 );
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (!userAuth) {
-        setCurrentUser(null);
+        dispatch(setCurrentUser(null));
+        return;
       }
       const userRef = await createUserProfileDocument(userAuth);
       userRef.onSnapshot(snapshot => {
-        setCurrentUser({
-          id: snapshot.id,
-          ...snapshot.data()
-        });
+        dispatch(
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          })
+        );
       });
     });
     return () => unsubscribeFromAuth();
-  }, []);
+  }, [dispatch]);
 
   return (
     <Fragment>
-      <Header currentUser={currentUser} />
+      <Header />
       <Suspense fallback={<div />}>
         <Switch>
           <Route path="/signin" component={SignInPage} />

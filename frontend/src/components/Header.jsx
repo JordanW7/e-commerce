@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase/firebase";
-
+import { useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../assets/crown.svg";
 
 const Container = styled.header`
@@ -40,7 +40,8 @@ const SignoutButton = styled.button`
   cursor: pointer;
 `;
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+  const currentUser = useSelector(state => state.user.currentUser);
   return (
     <Container>
       <LogoLink to="/">
@@ -50,7 +51,7 @@ const Header = ({ currentUser }) => {
         <NavLink to="/shop">SHOP</NavLink>
         <NavLink to="/shop">CONTACT</NavLink>
         {currentUser ? (
-          <SignoutButton type="button" onClick={auth.signOut}>
+          <SignoutButton type="button" onClick={() => auth.signOut()}>
             SIGN OUT
           </SignoutButton>
         ) : (
